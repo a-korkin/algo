@@ -98,3 +98,33 @@ void insert_at(llist_t *list, int idx, int value) {
     }
 }
 
+void remove_at(llist_t *list, int idx) {
+    check_list_exists(list);
+    if (idx > list->size - 1) {
+        fprintf(stdout, "Index out of bound: %d, size: %d\n", idx, list->size);
+    } else {
+        // int i;
+        // node_t *node = list->head->next;
+        // node_t *prev = list->head;
+        // for (i = 0; i < list->size; i++) {
+        //     if (i == idx) {
+        //         prev->next = node->next;
+        //         node->next = node->next->next;
+        //         free(node);
+        //     } else {
+        //         prev = node;
+        //         node = node->next;
+        //     }
+        // }
+        if (idx == 0) {
+            node_t *node = list->head;
+            list->head = list->head->next;
+            free(node);
+        } else {
+            node_t *prev = list->head;
+            node_t *next = list->head->next;
+        }
+        list->size--;
+    }
+}
+

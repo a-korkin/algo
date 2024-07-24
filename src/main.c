@@ -10,14 +10,19 @@ void show_menu(void) {
 
 void show_options_ll(void) {
     printf("-----------------------------------------------\n");
-    printf("            1) push         2) show\n");
-    printf("            3) insert       4) pop\n");
+    printf("1) push         2) show\n");
+    printf("3) insert at    4) pop      5) remove at\n");
     printf("-----------------------------------------------\n");
 }
 
 void insert_ll(int *idx, int *value) {
     printf("Enter index and integer value: ");
     scanf("%d %d", idx, value);
+}
+
+void remove_ll(int *idx) {
+    printf("Enter index: ");
+    scanf("%d", idx);
 }
 
 void demo_ll(void) {
@@ -44,6 +49,10 @@ void demo_ll(void) {
                 break;
             case '4':
                 printf("Poped value: %d\n", pop(list));
+                break;
+            case '5':
+                remove_ll(&idx);
+                remove_at(list, idx);
                 break;
             default: continue;
         }
