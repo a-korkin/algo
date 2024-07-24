@@ -8,8 +8,15 @@ typedef struct node {
 
 typedef struct {
     node_t *head;
+    node_t *tail;
     int size;
 } llist_t;
+
+llist_t *init(void);
+node_t *create_node(int value);
+void push(llist_t *list, int value);
+void show(llist_t *list);
+int pop(llist_t *list);
 
 #endif //__LINKED_LIST_H
 
