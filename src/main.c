@@ -15,8 +15,13 @@ void show_options_ll(void) {
     printf("-----------------------------------------------\n");
 }
 
+void insert_ll(int *idx, int *value) {
+    printf("Enter index and integer value: ");
+    scanf("%d %d", idx, value);
+}
+
 void demo_ll(void) {
-    int value, option;
+    int value, option, idx;
     llist_t *list = init();
     show_options_ll();
     while ((option = getchar()) && option != 'n' && option != EOF) {
@@ -33,9 +38,12 @@ void demo_ll(void) {
             case '2':
                 show(list);
                 break;
+            case '3':
+                insert_ll(&idx, &value);
+                insert_at(list, idx, value);
+                break;
             case '4':
-                int poped_value = pop(list);
-                printf("Poped value: %d\n", poped_value);
+                printf("Poped value: %d\n", pop(list));
                 break;
             default: continue;
         }

@@ -67,12 +67,34 @@ int pop(llist_t *list) {
         free(node);
         list->size--;
         node_t *last = list->head;
-        for (int i = 0; i < list->size - 1; i++) {
+        int i;
+        for (i = 0; i < list->size - 1; i++) {
             if (last->next) last = last->next;
         }
         list->tail = last;
         return value;
     }
     return 0;
+}
+
+void insert_at(llist_t *list, int idx, int value) {
+    check_list_exists(list);
+    if (idx > list->size - 1) {
+        fprintf(stdout, "Index out of bound: %d, size: %d\n", idx, list->size);
+    } else {
+        int i;
+        node_t *node = list->head;
+        node_t *new_node = create_node(value);
+        for (i = 0; i < list->size; i++) {
+            if (i == idx) {
+                new_node->next = node->next;
+                node->next = new_node;
+                fprintf(stdout, "test\n");
+            } else {
+                node = node->next;
+            }
+        }
+        list->size++;
+    }
 }
 
