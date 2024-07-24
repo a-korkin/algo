@@ -66,6 +66,11 @@ int pop(llist_t *list) {
         list->tail = NULL;
         free(node);
         list->size--;
+        node_t *last = list->head;
+        for (int i = 0; i < list->size - 1; i++) {
+            if (last->next) last = last->next;
+        }
+        list->tail = last;
         return value;
     }
     return 0;

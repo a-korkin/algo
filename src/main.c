@@ -10,8 +10,8 @@ void show_menu(void) {
 
 void show_options_ll(void) {
     printf("-----------------------------------------------\n");
-    printf("            1) add      2) show\n");
-    printf("            3) push     4) pop\n");
+    printf("            1) push         2) show\n");
+    printf("            3) insert       4) pop\n");
     printf("-----------------------------------------------\n");
 }
 
@@ -32,6 +32,10 @@ void demo_ll(void) {
                 break;
             case '2':
                 show(list);
+                break;
+            case '4':
+                int poped_value = pop(list);
+                printf("Poped value: %d\n", poped_value);
                 break;
             default: continue;
         }
