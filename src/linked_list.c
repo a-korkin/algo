@@ -1,126 +1,93 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "linked_list.h"
 
-llist_t *init(void) {
-    llist_t *list = (llist_t *) malloc(sizeof(llist_t));
-    if (!list) {
-        fprintf(stderr, "Error: couldn't allocate memory for linked list\n");
+llist *ll_init(void) {
+    llist *list = (llist *)malloc(sizeof(llist));
+    if (list == NULL) {
+        fprintf(stderr, "Error: failed allocate memory for linked list\n");
         exit(1);
     }
     list->head = list->tail = NULL;
-    list->size = 0;
     return list;
 }
 
-node_t *create_node(int value) {
-    node_t *node = (node_t *) malloc(sizeof(node_t));
-    if (!node) {
-        fprintf(stderr, "Error: couldn't allocate memory for node\n");
+node *ll_create_node(int value) {
+    node *n = (node *)malloc(sizeof(node));
+    if (n == NULL) {
+        fprintf(stderr, "Error: failed allocate memory for node\n");
         exit(1);
     }
-    node->value = value;
-    node->next = NULL;
-    return node;
+    n->next = NULL;
+    n->value = value;
+    return n;
 }
 
-void check_list_exists(llist_t *list) {
-    if (!list) {
-        fprintf(stderr, "Error: list not initialized\n");
-        exit(1);
+void ll_push(llist *list, int value) {
+    node *last;
+    node *new_node = ll_create_node(value);
+    // if (list->head == NULL) 
+    //     list->head = n;
+    // if (list->tail == NULL)
+    //     list->tail = n;
+    //
+    // if (list->tail != NULL) 
+    //     list->tail->next = n;
+    //
+    // list->tail = n;
+    // list->size++;
+
+    if (list->size == 0) {
+        list->head = list->tail = new_node;
+    } else {
+        last = list->tail;
+        list->tail = new_node;
+        last->next = new_node;
     }
-}
-
-void push(llist_t *list, int value) {
-    check_list_exists(list);
-    node_t *node = create_node(value);
-    if (!list->head) list->head = node;
-    if (list->tail) list->tail->next = node;
-    list->tail = node;
     list->size++;
 }
 
-void show(llist_t *list) {
-    check_list_exists(list);
-    if (!list->head) {
-        fprintf(stdout, "List is empty\n");
-    } else {
-        int i;
-        node_t *node = list->head;
-        for (i = 0; i < list->size; i++) {
-            fprintf(stdout, "%2d: value = %d\n", i, node->value);
-            node = node->next;
-        }
+void ll_show(llist *list) {
+    if (list->size == 0) {
+        printf("list is empty\n");
+    }
+    node *node = list->head;
+    while (node) {
+        printf("size: %d, node value: %d\n", list->size, node->value);
+        node = node->next;
     }
 }
 
-int pop(llist_t *list) {
-    check_list_exists(list);
-    if (list->size == 0) {
-        fprintf(stdout, "List is empty\n");
-        return 0;
-    }
-    node_t *node = list->tail;
-    if (node) {
-        int value = node->value;
-        list->tail = NULL;
+int ll_pop(llist *list) {
+    int result = 0;
+    if (list->size == 0) return 0;
+
+    if (list->size == 1) {
+        node *node = list->head;
+        result = node->value;
+        list->head = list->tail = NULL;
         free(node);
         list->size--;
-        node_t *last = list->head;
-        int i;
-        for (i = 0; i < list->size - 1; i++) {
-            if (last->next) last = last->next;
-        }
-        list->tail = last;
-        return value;
+        return result;
     }
-    return 0;
+
+    node *prev = list->head;
+    int i = 1;
+    while (prev->next) {
+        i++;
+        if (i == list->size) {
+            node *d = prev->next;
+            result = d->value;
+            prev->next = NULL;
+            list->size--;
+            free(d);
+            return result;
+        }
+        prev = prev->next;
+    }
+    return result;
 }
 
-void insert_at(llist_t *list, int idx, int value) {
-    check_list_exists(list);
-    if (idx > list->size - 1) {
-        fprintf(stdout, "Index out of bound: %d, size: %d\n", idx, list->size);
-    } else {
-        int i;
-        node_t *node = list->head;
-        node_t *new_node = create_node(value);
-        for (i = 0; i < list->size; i++) {
-            if (i == idx) {
-                new_node->next = node->next;
-                node->next = new_node;
-                fprintf(stdout, "test\n");
-            } else {
-                node = node->next;
-            }
-        }
-        list->size++;
-    }
-}
-
-void remove_at(llist_t *list, int idx) {
-    check_list_exists(list);
-    if (idx > list->size - 1) {
-        fprintf(stdout, "Index out of bound: %d, size: %d\n", idx, list->size);
-    } else {
-        if (idx == 0) {
-            node_t *node = list->head;
-            list->head = list->head->next;
-            free(node);
-        } else {
-            node_t *prev = list->head;
-            node_t *cur = list->head->next;
-            for (int i = 1; i <= idx; i++) {
-                if (idx == i) {
-                    prev->next = cur->next;
-                    free(cur);
-                } else {
-                    prev = prev->next;
-                    cur = cur->next;
-                }
-            }
-        }
-        list->size--;
-    }
-}
-
+void ll_insert_at(llist *list, int idx, int value);
+void ll_remove_at(llist *list, int idx);

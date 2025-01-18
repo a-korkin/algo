@@ -4,21 +4,21 @@
 typedef struct node {
     int value;
     struct node *next;
-} node_t;
+} node;
 
 typedef struct {
-    node_t *head;
-    node_t *tail;
+    node *head;
+    node *tail;
     int size;
-} llist_t;
+} llist;
 
-llist_t *init(void);
-node_t *create_node(int value);
-void push(llist_t *list, int value);
-void show(llist_t *list);
-int pop(llist_t *list);
-void insert_at(llist_t *list, int idx, int value);
-void remove_at(llist_t *list, int idx);
+llist *ll_init(void);
+node *ll_create_node(int value);
+void ll_push(llist *list, int value);
+void ll_show(llist *list);
+int ll_pop(llist *list);
+void ll_insert_at(llist *list, int idx, int value);
+void ll_remove_at(llist *list, int idx);
 
 #endif //__LINKED_LIST_H
 
