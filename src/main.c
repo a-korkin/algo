@@ -1,8 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "linked_list.h"
+#include "dynamic_array.h"
 
 int main(void) {
+    /*
+     * linked list
     llist *list = ll_init();
 
     ll_push(list, 2);
@@ -18,5 +21,9 @@ int main(void) {
     ll_show(list);
 
     free(list);
+    */
+
+    printf("hello world\n");
+
     return 0;
 }
