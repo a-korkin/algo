@@ -17,14 +17,18 @@ dynamic_array *da_init(int size) {
 
 void da_show(dynamic_array *da) {
     int i;
-    printf("values of dynamic array:\n");
+    printf("len: %d, cap: %d\n", da->len, da->cap);
     for (i = 0; i < da->len; i++) {
-        printf("%02d: %d\n", i+1, *(da->data+i));
+        printf("%3d: %d\n", i+1, *(da->data+i));
     }
 }
 
 void da_append(dynamic_array *da, int value) {
-    int *new_data = (int *)malloc(sizeof(int) * (da->len + 1));
+    int max_size = 1024;
+    if (da->len == da->cap && da->cap < max_size) {
+        da->cap *= 2;
+    }
+    int *new_data = (int *)malloc(sizeof(int) * (da->cap));
     if (new_data == NULL) {
         fprintf(stderr, "[ERROR] failed to allocate memory for data");
         exit(1);
@@ -34,7 +38,6 @@ void da_append(dynamic_array *da, int value) {
         *(new_data+i) = *(da->data+i);
     }
     da->len++;
-    da->cap++;
     *(new_data+(da->len-1)) = value;
     free(da->data);
     da->data = new_data;

@@ -25,10 +25,20 @@ int main(void) {
 
     printf("hello world\n");
 
-    dynamic_array *da = da_init(7);
+    dynamic_array *da = da_init(5);
     *(da->data+2) = 33;
     da_show(da);
     da_append(da, 5);
+    da_show(da);
+    da_append(da, 3);
+    da_show(da);
+    da_append(da, 7);
+    da_show(da);
+    da_append(da, 91);
+    da_show(da);
+    da_append(da, 3);
+    da_show(da);
+    da_append(da, 777);
     da_show(da);
 
     return 0;
