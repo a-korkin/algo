@@ -11,6 +11,6 @@ typedef struct dynamic_array {
 } dynamic_array;
 
 dynamic_array *da_init(int size);
-void da_append(int v);
+void da_append(dynamic_array *da, int value);
 void da_show(dynamic_array *da);
 #endif //DYNAMIC_ARRAY_H

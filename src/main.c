@@ -25,5 +25,11 @@ int main(void) {
 
     printf("hello world\n");
 
+    dynamic_array *da = da_init(7);
+    *(da->data+2) = 33;
+    da_show(da);
+    da_append(da, 5);
+    da_show(da);
+
     return 0;
 }

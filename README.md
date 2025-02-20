@@ -2,4 +2,5 @@
 
 ## Data structures:
 1. Linked list
+2. Dynamic array
 
