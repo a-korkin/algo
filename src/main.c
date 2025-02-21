@@ -40,6 +40,14 @@ int main(void) {
     da_show(da);
     da_append(da, 777);
     da_show(da);
+    da_append(da, 1);
+    da_show(da);
+    da_append(da, 2);
+    da_show(da);
+    da_append(da, 3);
+    da_show(da);
+    da_append(da, 4);
+    da_show(da);
 
     return 0;
 }

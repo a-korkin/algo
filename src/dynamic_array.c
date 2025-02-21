@@ -24,9 +24,16 @@ void da_show(dynamic_array *da) {
 }
 
 void da_append(dynamic_array *da, int value) {
+    if (da->len < da->cap) {
+        da->len++;
+        *(da->data+da->len-1) = value;
+        return;
+    }
     int max_size = 1024;
-    if (da->len == da->cap && da->cap < max_size) {
+    if (da->cap < max_size) {
         da->cap *= 2;
+    } else {
+        da->cap += da->cap * .25;
     }
     int *new_data = (int *)malloc(sizeof(int) * (da->cap));
     if (new_data == NULL) {
