@@ -3,6 +3,7 @@
 #include "linked_list.h"
 #include "dynamic_array.h"
 #include "algo.h"
+#include "btree.h"
 
 int main(void) {
     /*
@@ -47,7 +48,6 @@ int main(void) {
     da_show(da);
 
     free(da);
-    */
 
     int a[3] = {1,3,4};
     int b[4] = {2,5,7,8};
@@ -57,6 +57,11 @@ int main(void) {
     }
     printf("\n");
     free(c);
+    */
+
+    btree *bt = bt_init(4);
+    bt_show(bt);
+    free(bt);
 
     return 0;
 }
