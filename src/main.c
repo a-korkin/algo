@@ -4,8 +4,6 @@
 #include "dynamic_array.h"
 
 int main(void) {
-    /*
-     * linked list
     llist *list = ll_init();
 
     ll_push(list, 2);
@@ -21,9 +19,6 @@ int main(void) {
     ll_show(list);
 
     free(list);
-    */
-
-    printf("hello world\n");
 
     dynamic_array *da = da_init(5);
     *(da->data+2) = 33;
@@ -48,6 +43,8 @@ int main(void) {
     da_show(da);
     da_append(da, 4);
     da_show(da);
+
+    free(da);
 
     return 0;
 }

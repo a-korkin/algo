@@ -11,6 +11,9 @@ dynamic_array *da_init(int size) {
         fprintf(stderr, "[ERROR] failed to allocate memory for data");
         exit(1);
     }
+    for (int i = 0; i < size; i++) {
+        *(da->data+i) = 0;
+    }
     da->len = da->cap = size;
     return da;
 }
