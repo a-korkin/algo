@@ -2,8 +2,10 @@
 #include <stdio.h>
 #include "linked_list.h"
 #include "dynamic_array.h"
+#include "algo.h"
 
 int main(void) {
+    /*
     llist *list = ll_init();
 
     ll_push(list, 2);
@@ -45,6 +47,16 @@ int main(void) {
     da_show(da);
 
     free(da);
+    */
+
+    int a[3] = {1,3,4};
+    int b[4] = {2,5,7,8};
+    int *c = merge_sorted_arrays(a, 3, b, 4);
+    for (int i = 0; i < 3 + 4; i++) {
+        printf("%d ", *(c + i));
+    }
+    printf("\n");
+    free(c);
 
     return 0;
 }
